@@ -10,14 +10,7 @@ export default function Banner() {
     
   return (
     <View style={styles.banner}>
-        <Text style={{width:'50%',textAlign:'center'}}>Banna Sujan</Text>
-        <Text 
-        style={{
-          fontFamily:'Roboto',
-          fontSize:24,
-          width:'50%',
-          textAlign:'center'}}
-          >Hi, Welcome to my react native app</Text>
+        <Text>Banner</Text>
       </View>
   )
 }
@@ -33,9 +26,10 @@ const styles = StyleSheet.create({
         marginRight:30,
         verticalAlign:'auto',
         backgroundColor:'#e8e8e8',
-        borderRadius:30,
+        borderRadius:10,
         alignSelf:'center',
-        marginBottom:20,
+        marginTop: 20,
+        marginBottom:10,
         justifyContent:'center'
       }
 })

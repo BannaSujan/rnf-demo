@@ -10,6 +10,7 @@ const HomeScreen = () => {
     'Roboto': require('../assets/fonts/Roboto-Medium.ttf'),
     'Roboto-Light': require('../assets/fonts/Roboto-Light.ttf'),
     'Poppins': require('../assets/fonts/Poppins-SemiBold.ttf'),
+    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
   })
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -18,8 +19,8 @@ const HomeScreen = () => {
   const Card = ({ title, onPress }) => (
     <TouchableOpacity onPress={() => onPress(title)}>
       <View style={styles.card}>
-        <Text style={{ fontSize: 22, fontWeight: '700', color: '#393939', fontFamily: 'Roboto' }}>{title}</Text>
-        <Text style={{ fontSize: 18, color: '#202020', marginTop: 20, fontFamily: 'Roboto-Light' }}>
+        <Text style={{ fontSize: 22, fontWeight: '700', color: '#57409D', fontFamily: 'Poppins-Medium' }}>{title}</Text>
+        <Text style={{ fontSize: 12, color: 'white', marginTop: 20, fontFamily: 'Roboto-Light' }}>
           Description!
         </Text>
       </View>
@@ -37,22 +38,22 @@ const HomeScreen = () => {
       <View style={styles.myScrollView}>
         <Text style={styles.sectionTitle}>Planning and Execution</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
-          <Card title="Phase 1" onPress={handleCardPress} />
-          <Card title="Phase 2" onPress={handleCardPress} />
-          <Card title="Phase 3" onPress={handleCardPress} />
+          <Card title="Design" onPress={handleCardPress} />
+          <Card title="Develop" onPress={handleCardPress} />
+          <Card title="Deployment" onPress={handleCardPress} />
         </ScrollView>
       </View>
       <View style={styles.techStack}>
-        <Text style={{ textAlign: 'start', paddingLeft: (0.025 * Dimensions.get('window').width), fontSize: 24, fontFamily: 'Poppins' }}> Project TechStack</Text>
+        <Text style={{ marginTop:10,textAlign: 'start', paddingLeft: (0.025 * Dimensions.get('window').width), fontSize: 22, fontFamily: 'Poppins-Medium', color:'white' }}> Project TechStack</Text>
 
       </View>
       <View style={styles.pointView}>
-        <View style={{ width: '40%', backgroundColor: '#f6f6f6', borderWidth: 2, borderRadius: 10 }}>
-          <Text>differences</Text>
-        </View>
-        <View style={{ width: '40%', backgroundColor: 'red', borderWidth: 2, borderRadius: 10 }}>
+        <View style={{ width: '45%', backgroundColor: '#393939', borderWidth: 2, borderColor:'#555555', borderRadius: 10,  shadowColor: "#000", shadowOffset: { width: 6, height: 4, }, shadowOpacity: 0.2, shadowRadius: 4, }}>
           <Text style={styles.high_text}>Highlights</Text>
-          <Text>Highlights1</Text>
+        </View>
+        <View style={{ width: '45%', backgroundColor: '#393939', borderWidth: 2, borderColor:'#555555', borderRadius: 10,  shadowColor: "#000", shadowOffset: { width: 6, height: 4, }, shadowOpacity: 0.2, shadowRadius: 4,}}>
+          <Text style={styles.high_text}>Future Scope</Text>
+
         </View>
       </View>
 
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 2,
     paddingTop: 50,
-    backgroundColor: '#f3f3f3'
+    backgroundColor: '#202020'
   },
   techStack: {
     flex: 0.15,
@@ -94,16 +95,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   myScrollView: {
-    backgroundColor: '#dadada',
+    backgroundColor: '#57409D',
     borderRadius: 10,
+    borderColor: '#2B1C59',
+    borderWidth: 3,
     flex: 0.55,
     height: '100%',
     width: '95%',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 6,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   pointView: {
     flex: 0.75,
-    backgroundColor: '#d6d6d6',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     paddingTop: 20,
@@ -112,28 +121,28 @@ const styles = StyleSheet.create({
   card: {
     width: Dimensions.get('window').width - 150,
     height: '90%',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    alignItems: 'left',
+    backgroundColor: '#2B1C59',
     margin: 10,
     borderRadius: 10,
-    paddingTop: 20,
+    paddingTop: 12,
+    paddingLeft: 12,
     elevation: 3,
-    shadowColor: "#484848",
+    shadowColor: "#171717",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 6,
+      height: 4,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginLeft: 10,
+    fontSize: 22,
+    marginLeft: 15,
     marginTop: 20,
-    color: '#393939',
-    fontFamily: 'Poppins',
-    textAlign: 'center'
+    color: 'white',
+    fontFamily: 'Poppins-Medium',
+    textAlign: 'left'
   },
   centeredView: {
     flex: 1,
@@ -147,12 +156,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: "#171717",
     shadowOffset: {
-      width: 0,
-      height: 2
+      width: 6,
+      height: 4,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5,
     width: '100%',
@@ -174,8 +183,12 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   high_text: {
+    fontFamily: 'Poppins-Medium',
     fontSize: 20,
-    textAlign: 'center',
+    color: '#969696',
+    textAlign: 'left',
+    paddingLeft: 12,
+    paddingTop: 12,
     fontWeight: '700',
   }
 });
