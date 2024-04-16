@@ -14,8 +14,8 @@ const PhaseModal = ({ isModalVisible, setModalVisible, phaseTitle }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
                 <Text style={styles.modalText}>{phaseTitle}</Text>
-                <Text style={styles.phaseParams}> phase timeline | Phase Value</Text>
-                <Text style={{alignSelf:'flex-start',fontSize:22,color:'white',marginLeft:40}}>Description</Text>
+                <Text style={styles.phaseParams}> Phase timeline | Phase Value</Text>
+                <Text style={{alignSelf:'flex-start',fontSize:22,color:'white',marginLeft:40, fontFamily:'Poppins-Medium'}}>Description</Text>
                 <Text style={styles.phaseDescription}>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,</Text>
           </View>
           <TouchableOpacity
@@ -54,10 +54,16 @@ const styles = StyleSheet.create({
         height: '70%'
       },
       phaseParams:{
-        color:'grey',
+        color:'white',
+        fontFamily: 'Poppins-Medium',
+        backgroundColor: '#57409D',
         fontSize:16,
-        marginTop:20,
-        marginBottom:20
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
+        marginTop:10,
+        marginBottom:20,
     },
     phaseDescription:{
         color:'grey',
@@ -76,19 +82,23 @@ const styles = StyleSheet.create({
       },
       textStyle: {
         color: "white",
-        fontWeight: "bold",
+        fontFamily: 'Poppins',
         textAlign: "center"
       },
       modalText: {
-        marginBottom: 15,
+        marginBottom: 5,
         textAlign: "center",
         color:'white',
-        fontSize:35
+        fontFamily: 'Poppins',
+        fontSize:38,
       },
       buttonClose: {
-        backgroundColor: "#2196F3",
+        backgroundColor: "#57409D",
         borderRadius: 20,
-        padding: 10,
+        paddingLeft: 20,
+        paddingRight:20,
+        paddingTop: 10,
+        paddingBottom: 10,
         elevation: 2
       },
 });
