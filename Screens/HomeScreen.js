@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Text, StyleSheet, Modal, TouchableOpacity,Dimensions,Image } from 'react-native';
-import {useFonts} from 'expo-font'
+import { View, ScrollView, Text, StyleSheet, Modal, TouchableOpacity, Dimensions, Image } from 'react-native';
+import { useFonts } from 'expo-font'
+import Banner from '../Components/HomeScreen/Banner';
 
 
 const HomeScreen = () => {
 
   let [fontsLoaded] = useFonts({
-    'Roboto':require('../assets/fonts/Roboto-Medium.ttf'),
-    'Roboto-Light':require('../assets/fonts/Roboto-Light.ttf'),
-    'Poppins':require('../assets/fonts/Poppins-SemiBold.ttf'),
+    'Roboto': require('../assets/fonts/Roboto-Medium.ttf'),
+    'Roboto-Light': require('../assets/fonts/Roboto-Light.ttf'),
+    'Poppins': require('../assets/fonts/Poppins-SemiBold.ttf'),
   })
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
 
-  // A simple card component
   const Card = ({ title, onPress }) => (
     <TouchableOpacity onPress={() => onPress(title)}>
       <View style={styles.card}>
-        <Text style={{ fontSize: 22, fontWeight: '700',color:'#393939',fontFamily:'Roboto' }}>{title}</Text>
-        <Text style={{ fontSize: 18, color: '#202020', marginTop: 20,fontFamily:'Roboto-Light' }}>
-          Description!!!Description!!!Description!!!Description!!!Description!!!Description!!!Description!!!Description!!!
+        <Text style={{ fontSize: 22, fontWeight: '700', color: '#393939', fontFamily: 'Roboto' }}>{title}</Text>
+        <Text style={{ fontSize: 18, color: '#202020', marginTop: 20, fontFamily: 'Roboto-Light' }}>
+          Description!
         </Text>
       </View>
     </TouchableOpacity>
@@ -32,32 +32,29 @@ const HomeScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.banner}>
-        <Text style={{fontFamily:'Roboto',fontSize:24,flex:0.6}}>Hi, welcome to my react native app</Text>
+    <View style={styles.container}>
+      <Banner />
+      <View style={styles.myScrollView}>
+        <Text style={styles.sectionTitle}>Planning and Execution</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
+          <Card title="Phase 1" onPress={handleCardPress} />
+          <Card title="Phase 2" onPress={handleCardPress} />
+          <Card title="Phase 3" onPress={handleCardPress} />
+        </ScrollView>
       </View>
-      <View style={{backgroundColor:'#dadada', borderRadius:'10'}}>
-      <Text style={styles.sectionTitle}>Highlights</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
-        <Card title="Highlight 1" onPress={handleCardPress} />
-        <Card title="Highlight 2" onPress={handleCardPress} />
-        <Card title="Highlight 3" onPress={handleCardPress} />
-      </ScrollView>
+      <View style={styles.techStack}>
+        <Text style={{ textAlign: 'start', paddingLeft: (0.025 * Dimensions.get('window').width), fontSize: 24, fontFamily: 'Poppins' }}> Project TechStack</Text>
+
       </View>
-
-      <Text style={styles.sectionTitle}>Planning</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
-        <Card title="Plan 1" onPress={handleCardPress} />
-        <Card title="Plan 2" onPress={handleCardPress} />
-        <Card title="Plan 3" onPress={handleCardPress} />
-      </ScrollView>
-
-      <Text style={styles.sectionTitle}>Scope for improvement</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
-        <Card title="Activity 1" onPress={handleCardPress} />
-        <Card title="Activity 2" onPress={handleCardPress} />
-        <Card title="Activity 3" onPress={handleCardPress} />
-      </ScrollView>
+      <View style={styles.pointView}>
+        <View style={{ width: '40%', backgroundColor: '#f6f6f6', borderWidth: 2, borderRadius: 10 }}>
+          <Text>differences</Text>
+        </View>
+        <View style={{ width: '40%', backgroundColor: 'red', borderWidth: 2, borderRadius: 10 }}>
+          <Text style={styles.high_text}>Highlights</Text>
+          <Text>Highlights1</Text>
+        </View>
+      </View>
 
       <Modal
         animationType="slide"
@@ -79,28 +76,42 @@ const HomeScreen = () => {
           </View>
         </View>
       </Modal>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     paddingTop: 50,
-    backgroundColor:'#f3f3f3'
+    backgroundColor: '#f3f3f3'
   },
-  banner:{
-    flex:1,
-    flexDirection:'row',
-    height:'20%',
-    width:'100%'
+  techStack: {
+    flex: 0.15,
+    backgroundColor: "transparent"
   },
   scrollView: {
     marginBottom: 10,
   },
+  myScrollView: {
+    backgroundColor: '#dadada',
+    borderRadius: 10,
+    flex: 0.55,
+    height: '100%',
+    width: '95%',
+    alignSelf: 'center'
+  },
+  pointView: {
+    flex: 0.75,
+    backgroundColor: '#d6d6d6',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    paddingTop: 20,
+    paddingBottom: 20
+  },
   card: {
-    width: 250,
-    height: 170,
+    width: Dimensions.get('window').width - 150,
+    height: '90%',
     alignItems: 'center',
     backgroundColor: 'white',
     margin: 10,
@@ -120,8 +131,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
     marginTop: 20,
-    color:'#393939',
-    fontFamily:'Poppins'
+    color: '#393939',
+    fontFamily: 'Poppins',
+    textAlign: 'center'
   },
   centeredView: {
     flex: 1,
@@ -143,8 +155,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-    width:'100%',
-    height:'100%'
+    width: '100%',
+    height: '100%'
   },
   buttonClose: {
     backgroundColor: "#2196F3",
@@ -160,6 +172,11 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
+  },
+  high_text: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: '700',
   }
 });
 
