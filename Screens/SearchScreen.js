@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   header:{
     fontSize:30,
     fontWeight:'700',
+    fontFamily: 'Poppins',
     marginBottom:20,
     color:'#ffffff'
   },
@@ -62,12 +63,13 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '80%',
+    backgroundColor: '#393939',
     padding: 10,
     fontSize: 16,
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: '#555555',
     borderRadius: 20,
-    color:'#1f1f1f',
+    color:'white',
   },
   resultsContainer: {
     width: '100%',
@@ -76,15 +78,25 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     height: 150,
-    backgroundColor: 'white',
+    backgroundColor: '#57409D',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 10,
     marginVertical: 10,
+    borderWidth: 2,
+    borderColor: '#2B1C59',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 6,
+      height: 4,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   name: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Poppins',
+    color: 'white',
   },
   bio: {
     fontSize: 14,
