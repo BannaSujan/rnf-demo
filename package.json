@@ -16,6 +16,7 @@
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
+    "axios": "^1.6.8",
     "boxicons": "^2.1.4",
     "expo": "~50.0.14",
     "expo-auth-session": "~5.4.0",

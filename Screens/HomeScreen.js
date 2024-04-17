@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, ScrollView, Text, StyleSheet, Modal, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { useFonts } from 'expo-font'
 import Banner from '../Components/HomeScreen/Banner';
 import PhaseModal from '../Components/HomeScreen/PhaseModal';
-
+import axios from 'axios';
+import PhaseCard from '../Components/HomeScreen/PhaseCard';
+import ProjectTechStack from '../Components/HomeScreen/ProjectTechStack';
 
 const HomeScreen = () => {
 
@@ -15,23 +17,45 @@ const HomeScreen = () => {
   })
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedCard, setSelectedCard] = useState(null);
 
-  const Card = ({ title, onPress }) => (
-    <TouchableOpacity onPress={() => onPress(title)}>
-      <View style={styles.card}>
-        <Text style={{ fontSize: 22, fontWeight: '700', color: '#57409D', fontFamily: 'Poppins-Medium' }}>{title}</Text>
-        <Text style={{ fontSize: 12, color: 'white', marginTop: 20, fontFamily: 'Roboto-Light' }}>
-          Description!
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
-
-  const handleCardPress = (title) => {
-    setSelectedCard(title);
+  const [selected, setSelected] = useState({
+    phaseTitle: null,
+    phaseTimeline: null,
+    phaseDescription: null,
+    phaseTasks: [],
+    phaseActions: [],
+    phaseValue: null,
+  });
+  
+  const [phasesData, setPhasesData] = useState([]);
+  
+  const handleCardPress = (item) => {
+    setSelected({
+      phaseTitle: item.phaseTitle,
+      phaseTimeline: item.phaseTimeline,
+      phaseDescription: item.phaseDescription,
+      phaseTasks: item.phaseTasks,
+      phaseActions: item.phaseActions,
+      phaseValue: item.phaseValue,
+    });
     setModalVisible(true);
   };
+  
+  useEffect(() => {
+    axios.get(`http://localhost:3005/api/phases`)
+      .then(response => {
+        console.log(response.data);
+        setPhasesData(response.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+  
+  const phasesCards = phasesData.map((item) => {
+    return (
+      
+      <PhaseCard style={styles.card} title={item.phaseTitle} onPress={() => handleCardPress(item)} />
+    );
+  });
 
   return (
     <View style={styles.container}>
@@ -39,14 +63,12 @@ const HomeScreen = () => {
       <View style={styles.myScrollView}>
         <Text style={styles.sectionTitle}>Planning and Execution</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
-          <Card title="Design" onPress={handleCardPress} />
-          <Card title="Develop" onPress={handleCardPress} />
-          <Card title="Deployment" onPress={handleCardPress} />
+          {phasesCards}
         </ScrollView>
       </View>
       <View style={styles.techStack}>
         <Text style={{ marginTop:10,textAlign: 'start', paddingLeft: (0.025 * Dimensions.get('window').width), fontSize: 22, fontFamily: 'Poppins-Medium', color:'white' }}> Project TechStack</Text>
-
+        <ProjectTechStack/>
       </View>
       <View style={styles.pointView}>
         <View style={{ width: '45%', backgroundColor: '#393939', borderWidth: 2, borderColor:'#555555', borderRadius: 10,  shadowColor: "#000", shadowOffset: { width: 6, height: 4, }, shadowOpacity: 0.2, shadowRadius: 4, }}>
@@ -54,14 +76,13 @@ const HomeScreen = () => {
         </View>
         <View style={{ width: '45%', backgroundColor: '#393939', borderWidth: 2, borderColor:'#555555', borderRadius: 10,  shadowColor: "#000", shadowOffset: { width: 6, height: 4, }, shadowOpacity: 0.2, shadowRadius: 4,}}>
           <Text style={styles.high_text}>Future Scope</Text>
-
         </View>
       </View>
 
       <PhaseModal 
       isModalVisible={isModalVisible}
       setModalVisible={setModalVisible}
-      phaseTitle={selectedCard}/>
+      phaseCard={selected}/>
     </View>
   );
 };
@@ -73,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#202020'
   },
   techStack: {
-    flex: 0.15,
+    flex: 0.25,
     backgroundColor: "transparent"
   },
   scrollView: {
@@ -97,29 +118,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   pointView: {
-    flex: 0.75,
+    flex: 0.85,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     paddingTop: 20,
     paddingBottom: 20
-  },
-  card: {
-    width: Dimensions.get('window').width - 150,
-    height: '90%',
-    alignItems: 'left',
-    backgroundColor: '#2B1C59',
-    margin: 10,
-    borderRadius: 10,
-    paddingTop: 12,
-    paddingLeft: 12,
-    elevation: 3,
-    shadowColor: "#171717",
-    shadowOffset: {
-      width: 6,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
   },
   sectionTitle: {
     fontSize: 22,

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, TextInput, StyleSheet, ScrollView, Text, Dimensions } from 'react-native';
 import usersData from '../constants/mockdata';
+import Axios from 'axios'
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
+
+  // useEffect(()=>{
+  //   Axios.get('')
+  // })
 
   useEffect(() => {
     const matchedUsers = searchQuery ? usersData.filter(user =>
@@ -39,17 +44,21 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 150,
+    paddingTop: Dimensions.get('window').height*0.15,
+    backgroundColor:'#202020'
   },
   header:{
     fontSize:30,
     fontWeight:'700',
-    marginBottom:20
+    marginBottom:20,
+    color:'#ffffff'
   },
   inputContainer: {
     width: '100%',
     alignItems: 'center',
     padding: 10,
+    borderColor:'white'
+    
   },
   input: {
     width: '80%',
@@ -58,6 +67,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'black',
     borderRadius: 20,
+    color:'#1f1f1f',
   },
   resultsContainer: {
     width: '100%',

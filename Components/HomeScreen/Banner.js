@@ -17,7 +17,7 @@ export default function Banner() {
 
 const styles = StyleSheet.create({
     banner:{
-        flex:0.55,
+        flex:0.35,
         flexDirection:'row',
         width:'95%',
         height:'95%',
