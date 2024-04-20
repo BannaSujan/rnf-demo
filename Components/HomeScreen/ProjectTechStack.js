@@ -41,5 +41,6 @@ const styles = StyleSheet.create({
     tabText: {
       color: 'white',
       fontSize: 16,
+      fontFamily: 'Poppins'
     },
   });

@@ -10,15 +10,15 @@ export default function Banner() {
     
   return (
     <View style={styles.banner}>
-        <Text>Banner</Text>
-      </View>
+        <Text style={{fontFamily:'Poppins',fontSize:25,textAlign:'center'}}>Crafting Excellence</Text>
+        <Text style={{fontFamily:'Poppins-Light',fontSize:22,textAlign:'center'}}>Innovative, Expert, Reliable</Text>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
     banner:{
         flex:0.35,
-        flexDirection:'row',
         width:'95%',
         height:'95%',
         padding:20,

@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, StyleSheet, ScrollView, Text, Dimensions } from 'react-native';
-import usersData from '../constants/mockdata';
-import Axios from 'axios'
+import axios from 'axios'
 
 const SearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [usersData,setUsersData] = useState([]);
 
-  // useEffect(()=>{
-  //   Axios.get('')
-  // })
+  useEffect(() => {
+    axios.get(`http://192.168.1.237:3005/api/users`)
+      .then(response => {
+        setUsersData(response.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   useEffect(() => {
     const matchedUsers = searchQuery ? usersData.filter(user =>
@@ -23,8 +27,9 @@ const SearchScreen = () => {
       <View style={styles.inputContainer}>
         <Text style={styles.header}>Search Users</Text>
         <TextInput
-          style={styles.input}
-          placeholder="Search by first/last name"
+          style={[styles.input, { color: 'white', fontSize: 16, padding: 10 }]} 
+          placeholder="Search by First/Last name"
+          placeholderTextColor="#888"
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
@@ -34,6 +39,10 @@ const SearchScreen = () => {
           <View key={user.id} style={styles.card}>
             <Text style={styles.name}>{user.name}</Text>
             <Text style={styles.bio}>{user.bio}</Text>
+            <View style={{flexDirection:'row',width:'70%',justifyContent:'space-evenly',marginTop:15}}>
+                <Text style={{color:'#2B1C59'}}>Language: {user.language}</Text>
+                <Text style={{color:'#2B1C59'}}>Version: {user.version}</Text>
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -70,6 +79,7 @@ const styles = StyleSheet.create({
     borderColor: '#555555',
     borderRadius: 20,
     color:'white',
+    fontFamily:'Poppins-Medium'
   },
   resultsContainer: {
     width: '100%',
@@ -77,13 +87,14 @@ const styles = StyleSheet.create({
   card: {
     width: '90%',
     alignSelf: 'center',
-    height: 150,
+    paddingVertical: 10,
     backgroundColor: '#57409D',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
     marginVertical: 10,
     borderWidth: 2,
+    padding:10,
     borderColor: '#2B1C59',
     shadowColor: "#000",
     shadowOffset: {
@@ -97,10 +108,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Poppins',
     color: 'white',
+    backgroundColor: '#2B1C59',
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 5,
+    paddingTop: 5,
+    borderRadius: 20,
   },
   bio: {
-    fontSize: 14,
-    textAlign: 'center',
+    color: 'white',
+    fontSize: 13,
+    textAlign: 'justify',
     marginTop: 5,
   },
 });

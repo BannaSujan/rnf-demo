@@ -13,8 +13,25 @@ const HomeScreen = () => {
     'Roboto': require('../assets/fonts/Roboto-Medium.ttf'),
     'Roboto-Light': require('../assets/fonts/Roboto-Light.ttf'),
     'Poppins': require('../assets/fonts/Poppins-SemiBold.ttf'),
+    'Poppins-Light':require('../assets/fonts/Poppins-Light.ttf'),
     'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
   })
+
+  const highlights = ['User-Friendly Interface and Color Scheme',
+   'Optimal Use of React Components',
+   'Efficient Implementation of Hooks and State Management',
+   'Responsive Layout Across Devices',
+   'Intuitive Navigation Structure',
+   'Sound API Integration'];
+
+  const futureScope = [
+    'Enhanced Unit Testing',
+    'Robust User Authentication Measures',
+    'Integration of Cutting-Edge UI/UX Design Trends',
+    'Expansion to Additional Platforms and Devices',
+    'Increased Customization Options for Users',
+    'Strengthened API Security and Performance',
+];
 
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -42,9 +59,8 @@ const HomeScreen = () => {
   };
   
   useEffect(() => {
-    axios.get(`http://localhost:3005/api/phases`)
+    axios.get(`http://192.168.1.237:3005/api/phases`)
       .then(response => {
-        console.log(response.data);
         setPhasesData(response.data);
       })
       .catch(err => console.log(err));
@@ -53,7 +69,7 @@ const HomeScreen = () => {
   const phasesCards = phasesData.map((item) => {
     return (
       
-      <PhaseCard style={styles.card} title={item.phaseTitle} onPress={() => handleCardPress(item)} />
+      <PhaseCard style={styles.card} title={item.phaseTitle} desc={item.phaseDescription} val={item.phaseValue} onPress={() => handleCardPress(item)} />
     );
   });
 
@@ -71,11 +87,18 @@ const HomeScreen = () => {
         <ProjectTechStack/>
       </View>
       <View style={styles.pointView}>
-        <View style={{ width: '45%', backgroundColor: '#393939', borderWidth: 2, borderColor:'#555555', borderRadius: 10,  shadowColor: "#000", shadowOffset: { width: 6, height: 4, }, shadowOpacity: 0.2, shadowRadius: 4, }}>
+        <View style={{ width: '45%', backgroundColor: '#393939', borderWidth: 2, borderColor:'#555555', borderRadius: 10,  shadowColor: "#000", shadowOffset: { width: 6, height: 4, }, shadowOpacity: 0.2, shadowRadius: 4, overflow:'hidden'}}>
           <Text style={styles.high_text}>Highlights</Text>
+          {highlights.map((highlight, index) => (
+            <Text style={styles.container_text}>{highlight}</Text>
+      ))}
+          
         </View>
-        <View style={{ width: '45%', backgroundColor: '#393939', borderWidth: 2, borderColor:'#555555', borderRadius: 10,  shadowColor: "#000", shadowOffset: { width: 6, height: 4, }, shadowOpacity: 0.2, shadowRadius: 4,}}>
+        <View style={{ width: '45%', backgroundColor: '#393939', borderWidth: 2, borderColor:'#555555', borderRadius: 10,  shadowColor: "#000", shadowOffset: { width: 6, height: 4, }, shadowOpacity: 0.2, shadowRadius: 4, overflow:'hidden'}}>
           <Text style={styles.high_text}>Future Scope</Text>
+          {futureScope.map((scope, index) => (
+            <Text style={styles.container_text}>{scope}</Text>
+      ))}
         </View>
       </View>
 
@@ -135,12 +158,19 @@ const styles = StyleSheet.create({
   
   high_text: {
     fontFamily: 'Poppins-Medium',
-    fontSize: 20,
+    fontSize: 24,
     color: '#969696',
     textAlign: 'left',
     paddingLeft: 12,
     paddingTop: 12,
     fontWeight: '700',
+  },
+  container_text:{
+    fontFamily: 'Poppins-Light',
+    fontSize:12,
+    textAlign:'center',
+    color:'#efefef',
+    marginVertical:8
   }
 });
 

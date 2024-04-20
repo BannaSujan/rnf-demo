@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native';
+import {View,ScrollView, Text, StyleSheet, Modal, TouchableOpacity,Dimensions } from 'react-native';
 
 const PhaseModal = ({ isModalVisible, setModalVisible, phaseCard }) => {
   return (
@@ -17,6 +17,31 @@ const PhaseModal = ({ isModalVisible, setModalVisible, phaseCard }) => {
                 <Text style={styles.phaseParams}> {phaseCard.phaseTimeline} | {phaseCard.phaseValue}</Text>
                 <Text style={{alignSelf:'flex-start',fontSize:22,color:'white',marginLeft:40, fontFamily:'Poppins-Medium'}}>Description</Text>
                 <Text style={styles.phaseDescription}>{phaseCard.phaseDescription}</Text>
+                <Text style={{alignSelf:'flex-start',fontSize:22,color:'white',marginLeft:40, fontFamily:'Poppins-Medium'}}>Tasks Involved</Text>
+                <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.scrollViewContainer}
+                  >
+                    {phaseCard.phaseTasks.map((task, index) => (
+                      <TouchableOpacity key={index} style={styles.tab}>
+                        <Text style={styles.tabText}>{task}</Text>
+                      </TouchableOpacity>
+                    ))}
+                </ScrollView>
+                <Text style={{alignSelf:'flex-start',fontSize:22,color:'white',marginLeft:40, fontFamily:'Poppins-Medium'}}>Actions Taken</Text>
+                <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={styles.scrollViewContainer}
+                  >
+                    {phaseCard.phaseActions.map((action, index) => (
+                      <TouchableOpacity key={index} style={styles.tab}>
+                        <Text style={styles.tabText}>{action}</Text>
+                      </TouchableOpacity>
+                    ))}
+                </ScrollView>
+                
           </View>
           <TouchableOpacity
               style={styles.buttonClose}
@@ -100,6 +125,26 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         elevation: 2
+      },
+      scrollViewContainer: {
+        paddingHorizontal: 10,
+        height:Dimensions.get('window').height * 0.04,
+        alignContent:'center'
+      },
+      tab: {
+        backgroundColor: '#262626', 
+        borderRadius: 20, 
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        marginRight: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height:'auto',
+      },
+      tabText: {
+        color: 'white',
+        fontSize: 16,
+        fontFamily: 'Poppins-Medium'
       },
 });
 

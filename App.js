@@ -36,20 +36,20 @@ export default function App() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
-      <Tab.Screen name="Search" options={{headerShown:false}}component={SearchScreen}/>
+      <Tab.Screen name="Search" options={{headerShown:false}} component={SearchScreen}/>
         {/* {() => (
             <AuthWrapper  screenName="Search">
               {SearchScreen}
             </AuthWrapper>
           )}
       </Tab.Screen> */}
-      <Tab.Screen name="More Insights" /*component={InsightsScreen}*/>
-        {() => (
+      <Tab.Screen name="More Insights" options={{headerShown:false}} component={InsightsScreen} />
+        {/* {() => (
             <AuthWrapper  screenName="Insights">
               {InsightsScreen}
             </AuthWrapper>
           )}
-      </Tab.Screen>
+      </Tab.Screen> */}
     </Tab.Navigator>
     </NavigationContainer>
   );
